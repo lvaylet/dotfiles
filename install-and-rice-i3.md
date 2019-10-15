@@ -6,7 +6,37 @@
 sudo apt install i3 i3lock i3status dunst suckless-tools vim
 ```
 
-Log out, select i3 as your window manager and log back in
+For a flawless experience on HiDPI/Retina displays, run:
+
+```
+cat <<EOT >> $HOME/.Xresources
+
+# A Flawless i3wm experience on a HiDPI/Retina display
+# https://dougie.io/linux/hidpi-retina-i3wm/
+Xft.dpi: 192
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+EOT
+```
+
+and:
+
+```
+cat <<EOT >> $HOME/.profile
+
+# A Flawless i3wm experience on a HiDPI/Retina display
+# https://dougie.io/linux/hidpi-retina-i3wm/
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+EOT
+```
+
+Log out, select i3 as your window manager and log back in.
 
 Hit `Enter` to generate a config file, then choose your `Mod` key
 
