@@ -1,7 +1,6 @@
 # A Flawless i3wm experience on a HiDPI/Retina display
 # https://dougie.io/linux/hidpi-retina-i3wm/
 Xft.dpi: 192
-#URxvt.font: xft:FiraMono-Regular:size=10
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
