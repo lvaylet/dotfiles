@@ -1,6 +1,8 @@
-# Install, Customize and Rice i3 on Linux Mint
+# Install, Customize and Rice i3 on Linux Mint 19
 
-## Installing
+## Install
+
+Install i3 and some helpers/tools with:
 
 ```
 sudo apt install i3 i3lock i3status dunst suckless-tools vim
@@ -38,40 +40,41 @@ EOT
 
 Log out, select i3 as your window manager and log back in.
 
-Hit `Enter` to generate a config file, then choose your `Mod` key
+Hit `Enter` to generate a sample config file, then choose your `Mod` key.
 
-## Customizing
+## Customize
 
-Configuration files live in `~/.i3/` or `~/.config/i3/`, for example `~/.i3/config` or `~/.config/i3/config`.
+Configuration files live in `~/.i3/` or `~/.config/i3/` depending on your distribution, for example `~/.i3/config` or `~/.config/i3/config`.
 
-If you selected `No` upon first launch, use `i3-config-wizard` to generate a default config file.
+If you selected **No** upon first launch, use `i3-config-wizard` to generate a default config file.
 
-Define a local environment variable pointing to the config file with:
+Then make your life easier by defining local environment variables pointing to the config folder and config file with:
 
 ```
-I3_CONFIG=~/.config/i3/config
+I3_CONFIG_FOLDER=~/.config/i3
+I3_CONFIG_FILE=$I3_CONFIG_FOLDER/config
 ```
 
 ### Bind a key to i3lock
 
 ```bash
-cat <<EOT >> $I3_CONFIG
+cat <<EOT >> $I3_CONFIG_FILE
 
 # Lock screen with Mod+Shift+x
 bindsym $mod+shift+x exec i3lock
 EOT
 ```
 
-Full documentation: https://i3wm.org/
+Refer to the full i3 documentation at https://i3wm.org/ for more details.
 
-Restart i3 with `Mod+Shift+r`.
+Take changes into effect by restarting i3 with `Mod+Shift+r`.
 
 ### Add support for multimedia keys
 
 Add support for multimedia keys with:
 
 ```bash
-cat <<EOT >> $I3_CONFIG
+cat <<EOT >> $I3_CONFIG_FILE
 
 # Multimedia Keys
 # ---
@@ -92,39 +95,37 @@ bindsym XF86AudioPrev exec playerctl previous
 EOT
 ```
 
-Note that `pactl` is installed by default on Ubuntu. However `playerctl` is not. You need to install it from https://github.com/altdesktop/playerctl/releases:
+Note that `pactl` might installed by default on Ubuntu. However `playerctl` might not. You need to install it from https://github.com/altdesktop/playerctl/releases:
 
 ```
-curl -sL https://github.com/altdesktop/playerctl/releases/download/v2.0.2/playerctl-2.0.2_amd64.deb
+curl -sLO https://github.com/altdesktop/playerctl/releases/download/v2.0.2/playerctl-2.0.2_amd64.deb
 sudo dpkg -i playerctl-2.0.2_amd64.deb
 ```
 
 Reference: https://faq.i3wm.org/question/3747/enabling-multimedia-keys/?answer=3759#post-id-3759
 
-### Run applications on startup
+### Run application(s) on startup
 
-For example, load Rhythmbox automatically with:
+Load Rhythmbox automatically with:
 
 ```
-cat <<EOT >> $I3_CONFIG
+cat <<EOT >> $I3_CONFIG_FILE
 
 # Run on startup
 exec rhythmbox
 EOT
 ```
 
-Log out and log back it to test, as Mod+Shift+r is not enough here. Use `exec_always` to run applications on configuration reloads too.
+Log out and log back it to test, as `Mod+Shift+r` is not enough here. Use `exec_always` to run applications on configuration reloads too.
 
 ### Use custom wallpaper
 
-Save your wallpaper as `~/Pictures/wallpaper.jpg`
+Save your wallpaper as `~/Pictures/wallpaper.jpg`, then install `feh` with `sudo apt install -y feh`.
 
-Install `feh` with `sudo apt install -y feh`.
-
-Set wallpaper with:
+Set the wallpaper with:
 
 ```
-cat <<EOT >> $I3_CONFIG
+cat <<EOT >> $I3_CONFIG_FILE
 
 # Set wallpaper (even when reloading i3 config)
 # --bg-scale fits the file into the background without repeating it, cutting off
@@ -142,10 +143,10 @@ Use `arandr` on top of `xrandr` to configure monitors and changre resolution/ori
 sudo apt install -y arandr
 ```
 
-When you are happy with your changes, click **Save As** to save the generated  `xrandr` command. Append the command to your i3 config file to make sure the monitor is configured on startup.
+Run `arandr` from a terminal or the dmenu. Experiment with settings. When you are happy with your changes, click **Save As** to save the generated  `xrandr` command to a local file. Append the generated command to your i3 config file to make sure the monitor is configured on startup. For example, on a MacBook Pro 13" Retina with a 2560x1600 screen:
 
 ```
-cat <<EOT >> $I3_CONFIG
+cat <<EOT >> $I3_CONFIG_FILE
 
 # Configure monitor(s)
 exec_always xrandr --output HDMI-2 --off --output HDMI-1 --off --output DP-1 --off --output eDP-1 --primary --mode 2560x1600 --pos 0x0 --rotate normal --output DP-2 --off
@@ -154,13 +155,13 @@ EOT
 
 ### Configure workspaces
 
-Workspaces can be renamed from 1, 2, 3 to anything. For example:
+Workspaces can be renamed from **1**, **2**, **3** to anything. For example:
 
 ```
 bindsym $mod+1 workspace Terminals
 ```
 
-Also update the binding used to move windows to workspace 1 with:
+Then you can update the binding used to move windows to workspace 1 with:
 
 ```
 bindsym $mod+Shift+1 move container to workspace Terminals
@@ -171,6 +172,7 @@ Refactor with variables:
 ```
 set $workspace1 "1: Terminals"
 set $workspace2 "2: Chrome"
+...
 set $workspace10 "10: Music"
 
 bindsym $mod+1 workspace $workspace1
@@ -186,7 +188,7 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 
 ### Assign applications to workspaces
 
-Retrieve the window class of the application by running `xprop` from a terminal and clicking on the application window. Copy the second value of the `WM_CLASS` field, for example `Rhythmbox` for Rhythmbox.
+Retrieve the window class of the application to assign by running `xprop` from a terminal and clicking on the application window. Use the second value of the `WM_CLASS` field, for example `Rhythmbox` for Rhythmbox, to assign a class to a workspace.
 
 ```
 assign [class="Rhythmbox"] $workspace10
@@ -207,7 +209,7 @@ mkdir ~/.fonts
 mv fontawesome-webfont.ttf ~/.fonts/
 ```
 
-Navigate to the Font Awesome Cheat Sheet: https://fontawesome.com/v4.7.0/cheatsheet/, then look for your icon(s) and copy/paste them to vim (by right-clicking the icon).
+Navigate to the Font Awesome Cheat Sheet: https://fontawesome.com/v4.7.0/cheatsheet/, then `Ctrl+F` your icon(s) and copy/paste them to vim (by right-clicking the icon, not the text next to it).
 
 ```
 set $workspace1 "1: Terminals "
@@ -217,7 +219,7 @@ set $workspace10 "10: Music "
 
 Do not worry if the icons look malformed at first in the editor. They will look just fine the next time the file is opened.
 
-## Ricing
+## Rice
 
 ### Change the system font
 
@@ -231,19 +233,13 @@ cd YosemiteSanFranciscoFont-master
 mv *.ttf ~/.fonts/
 ```
 
-Set the system font by replacing:
+Set the system font in `$I3_CONFIG_FILE` by replacing `monospace` with `System San Francisco Display`:
 
 ```
-font pango:monospace 8
+sed -i -e 's/pango:monospace/pango:System San Francisco Display/g' $I3_CONFIG_FILE
 ```
 
-with:
-
-```
-font pango:System San Francisco Display 13
-```
-
-Propagate the changes to GTK by installing `sudo apt install -y lxappearance` and runnnng it from the dmenu. Click the **Default font:** button and pick **SFNS Display**. If the font cannot be found, edit the GTK configuration files located at `~/.gtkrc-2.0` and `~/.config/gtk-3.0/settings.ini`. Note that you might have to select a different font first, in order to force **lxappearance** to generate new config files:
+Also propagate the changes to GTK by installing **lxappearance** with `sudo apt install -y lxappearance` and runnnng it from the dmenu. Click the **Default font:** button and pick **SFNS Display**. Make sure to pick the **Regular** version, not the **Thin** or **Ultrathin** one. If the font cannot be found, edit the GTK configuration files located at `~/.gtkrc-2.0` and `~/.config/gtk-3.0/settings.ini`. Note that you might have to select a different font first, in order to force **lxappearance** to generate the two config files:
 
 ```
 gtk-font-name=SFNS Display 8
@@ -287,7 +283,7 @@ bar {
         status_command i3status
         colors {
 		background $bg-color
-	    	separator #757575
+	    separator #757575
 		#                  border             background         text
 		focused_workspace  $bg-color          $bg-color          $text-color
 		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
@@ -296,7 +292,7 @@ bar {
 }
 ```
 
-At this point, if you use Firefox, install the Arc Firefox theme from https://github.com/horst3180/arc-firefox-theme so Firefox displays the same colors.
+At this point, if you use Firefox, install the **Arc Firefox** theme from https://github.com/horst3180/arc-firefox-theme so Firefox displays the same colors.
 
 ### File Explorer
 
@@ -304,11 +300,11 @@ Install **Thunar** with `sudo apt install -y thunar`. Test it from the dmenu. No
 
 ### GTK Theme and Icons
 
-Install the Arc GTK theme with `sudo apt install -y arc-theme`.
+Install the **Arc GTK** theme with `sudo apt install -y arc-theme`.
 
-Open **lxappearance** and pick your favorite Arc theme from the list.
+Open **lxappearance** and pick your favorite Arc theme from the list on the left.
 
-Install the Moka icon set from https://snwh.org/moka/download. Paper is also nice.
+Install the **Moka** and **Paper** icon sets from https://snwh.org/moka/download.
 
 ```
 sudo add-apt-repository ppa:snwh/ppa
@@ -323,55 +319,57 @@ Rofi does the same thing but is much easier to configure and customize.
 
 Install Rofi with `sudo apt install -y rofi`.
 
-Replace the `$mod+d` binding by copying the config from https://github.com/bookercodes/dotfiles/blob/ubuntu/.i3/config
+Replace the `$mod+d` binding in `$I3_CONFIG_FILE` by copying the config from https://github.com/bookercodes/dotfiles/blob/ubuntu/.i3/config
 
 ```
 bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
 ```
 
-`man rofi` to understand the flags.
+Use `man rofi` to understand the flags.
 
 To enable transparency, run `sudo apt install -y compton` and set it to run on startup with:
 
 ```
+cat <<EOT >> $I3_CONFIG_FILE
 
 # Run compton on startup to handle transparency and fade effects
 exec compton -f
+EOT
 ```
 
 ### Lock Screen
 
-Enhance **i3lock** with a consistent background color with:
+Update the **i3lock** binding to include a consistent background color with:
 
 ```
 bindsym $mod+shift+x exec i3lock --color "$bg-color"
 ```
 
-More customizations at https://www.reddit.com/r/unixporn/comments/3358vu/i3lock_unixpornworthy_lock_screen/
+For more customizations of the lock screen, refer to https://www.reddit.com/r/unixporn/comments/3358vu/i3lock_unixpornworthy_lock_screen/
 
 ### Status Bar & Blocks
 
-The status bar is controlled by the `bar` block in `$I3_CONFIG`.
+The status bar is controlled by the `bar` block in `$I3_CONFIG_FILE`.
 
-Blocks can be configured with `status_command`. Try running `i3status` in  a terminal to understand how it works.
+Blocks can be configured with `status_command`. Try running the default `i3status` status command in  a terminal to understand how it works.
 
 To take things further, install **i3blocks** with `sudo apt install -y i3blocks` and test it locally in a terminal. Notice how the output gets refreshed automatically.
 
-Customize **i3blocks** by copying its configuration files (adjust for your i3 config location):
+Customize **i3blocks** by copying its default configuration files:
 
 ```
-cp /etc/i3blocks.conf $HOME/.config/i3/
+cp /etc/i3blocks.conf $I3_CONFIG_FOLDER
 ```
 
-Update the `status_command` in `I3_CONFIG` to use your local file with:
+Update the `status_command` in `I3_CONFIG_FILE` to use your local file with (adjust for your i3 config location)):
 
 ```
 status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
 ```
 
-Edit `$HOME/.config/i3/i3blocks.conf` to enable `load_average` or set `time.interval` to `1` (instead of `5` by default)
+Edit `$I3_CONFIG_FOLDER/i3blocks.conf` to enable `load_average` or set `time.interval` to `1` (instead of `5` by default)
 
-In case the volume indicator does not work as expected, fix it with:
+In case the volume indicator does not work as expected, fix it by setting `interval` to `1` (instead of `once` by default) and by tweaking the command with:
 
 ```
 [volume]
@@ -379,9 +377,9 @@ interval=1
 command=/usr/share/i3blocks/volume 5 pulse
 ```
 
-Confirm the volume indicator works as expected with `pavu` application.
+Confirm the volume indicator works as expected with `pavu` or `rhythmbox`.
 
-Finally, add icons by copying them from the Font Awesome Cheat Sheet:
+Finally, you can add icons by copying them from the Font Awesome Cheat Sheet:
 
 ```
 [disk]
