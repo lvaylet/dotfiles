@@ -5,7 +5,7 @@
 Install i3 and some helpers/tools with:
 
 ```
-sudo apt install i3 i3lock i3status dunst suckless-tools vim
+sudo apt install -y i3 i3lock i3status dunst suckless-tools vim
 ```
 
 For a flawless experience on HiDPI/Retina displays, run:
@@ -239,7 +239,7 @@ Set the system font in `$I3_CONFIG_FILE` by replacing `monospace` with `System S
 sed -i -e 's/pango:monospace/pango:System San Francisco Display/g' $I3_CONFIG_FILE
 ```
 
-Also propagate the changes to GTK by installing **lxappearance** with `sudo apt install -y lxappearance` and runnnng it from the dmenu. Click the **Default font:** button and pick **SFNS Display**. Make sure to pick the **Regular** version, not the **Thin** or **Ultrathin** one. If the font cannot be found, edit the GTK configuration files located at `~/.gtkrc-2.0` and `~/.config/gtk-3.0/settings.ini`. Note that you might have to select a different font first, in order to force **lxappearance** to generate the two config files:
+Also propagate the changes to GTK by installing **lxappearance** with `sudo apt install -y lxappearance` and runnnng it from the dmenu. Click the **Default font:** button and pick **SFNS Display**. Make sure to pick the **Regular** version, not **Thin** or **Ultralight**. If the font cannot be found, edit the GTK configuration files located at `~/.gtkrc-2.0` and `~/.config/gtk-3.0/settings.ini`. Note that you might have to select a different font first, in order to force **lxappearance** to generate the two config files:
 
 ```
 gtk-font-name=SFNS Display 8
