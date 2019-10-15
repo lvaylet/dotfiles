@@ -93,7 +93,7 @@ bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_
 # Split orientation
 bindsym $mod+h split h;exec notify-send 'tile horizontally'
 bindsym $mod+v split v;exec notify-send 'tile vertically'
-bindsym $mod+q split toggle
+bindsym $mod+a split toggle
 
 # Toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -288,7 +288,7 @@ bar {
 }
 
 # Hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+bindsym $mod+comma bar mode toggle
 
 # Lock screen with Mod+Shift+x
 bindsym $mod+shift+x exec i3lock --color "$bg-color"
