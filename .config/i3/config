@@ -312,7 +312,7 @@ bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'screen brig
 # --bg-scale fits the file into the background without repeating it, cutting off
 # stuff or using borders. The aspect ratio is not preserved, as opposed to
 # --bg-fill.
-exec_always --no-startup-id feh --bg-scale /home/laurent/Pictures/wallpaper.jpg
+exec_always --no-startup-id feh --bg-scale $HOME/Pictures/wallpaper.jpg
 
 # Configure monitor(s)
 exec_always --no-startup-id randr --output HDMI-2 --off --output HDMI-1 --off --output DP-1 --off --output eDP-1 --primary --mode 2560x1600 --pos 0x0 --rotate normal --output DP-2 --off
@@ -323,3 +323,7 @@ exec_always xmodmap -e "keysym Caps_Lock = Escape"  # set caps_lock as escape, u
 
 # Run compton on startup to handle transparency and fade effects
 exec --no-startup-id compton -f
+
+# Configure MBP 13" French keyboard
+# Refer to https://faq.i3wm.org/question/5606/using-setxkbmap-to-disabple-capslock/ regarding "sleep 1; "
+exec_always --no-startup-id "sleep 1; setxkbmap -layout fr -variant mac -model apple"
