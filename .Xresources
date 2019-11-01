@@ -1,5 +1,5 @@
-# A Flawless i3wm experience on a HiDPI/Retina display
-# https://dougie.io/linux/hidpi-retina-i3wm/
+! A Flawless i3wm experience on a HiDPI/Retina display
+! https://dougie.io/linux/hidpi-retina-i3wm/
 Xft.dpi: 192
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
