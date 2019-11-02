@@ -1,9 +1,41 @@
-! A Flawless i3wm experience on a HiDPI/Retina display
-! https://dougie.io/linux/hidpi-retina-i3wm/
-Xft.dpi: 192
-Xft.autohint: 0
-Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintfull
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: rgb
+! ~/.Xresources is a user-level configuration dotfile.
+! It can be used to set X resources, which are configuration parameters
+! for X client applications.
+! 
+! Among other things they can be used to:
+! - configure terminal preferences (e.g. terminal colors)
+! - set DPI, anti-aliasing, hinting and other X font settings
+! - change the Xcursor theme
+! - theme XScreenSaver
+! - configure low-level X applications like: xorg-xclock, xpdf, rxvt-unicode
+!
+! Reference:
+! - https://github.com/ibrahimbutt/direwolf-arch-rice/blob/master/.Xresources
+
+*.font: xft:Source Code Pro for Powerline:size=10
+
+! For a flawless i3wm experience on a HiDPI/Retina display
+! References:
+! - https://dougie.io/linux/hidpi-retina-i3wm/
+! - https://github.com/ibrahimbutt/direwolf-arch-rice/blob/master/.Xresources
+Xft.dpi:                192
+Xft.antialias:          1
+Xft.autohint:           1           # 0 in the original reference (dougie.io)
+Xft.hinting:            1
+Xft.hintstyle:          hintslight  # hintfull in the original reference (dougie.io)
+Xft.lcdfilter:          lcdlight    # lcddefault in the original reference (dougie.io)
+Xft.rgba:               rgb
+                        
+URxvt*termName:         rxvt-256color
+URxvt.depth:            32
+URxvt*lineSpace:        1
+URxvt.letterSpace:      -1
+URxvt.iso14755:         false
+URxvt.iso14755_52:      false
+URxvt*geometry:         65x17
+URxvt.scrollBar:        false
+URxvt*loginShell:       true
+URxvt.internalBorder:   25
+URxvt.perl-ext:	 	      default,matcher
+URxvt.url-launcher:     firefox
+URxvt.matcher.button: 	1
