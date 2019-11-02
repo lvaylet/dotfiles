@@ -12,7 +12,7 @@
 ! Reference:
 ! - https://github.com/ibrahimbutt/direwolf-arch-rice/blob/master/.Xresources
 
-*.font: xft:Source Code Pro for Powerline:size=10
+*.font: xft:Source Code Pro for Powerline:size=8
 
 ! For a flawless i3wm experience on a HiDPI/Retina display
 ! References:
