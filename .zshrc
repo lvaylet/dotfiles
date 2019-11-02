@@ -104,5 +104,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Simplify dotfiles management
+# Reference: atlassian.com/git/tutorials/dotfiles
+alias config='/usr/bin/git --git-dir=/home/laurent/.cfg/ --work-tree=/home/laurent'
+
 # Remove username and hostname from prompt
 prompt_context() {}
