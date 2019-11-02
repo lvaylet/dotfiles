@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+# Terminate existing polybar instances
+killall -q polybar
+
+# Wait until the processes have been shut down
+while pgrep -x polybar >/dev/null; do sleep 1; done
+
+# Launch polybar. `bar` is the name set in the polybar config.
+polybar bar
+
+echo "Polybar launched."
