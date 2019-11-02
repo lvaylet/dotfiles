@@ -32,13 +32,16 @@ font pango:System San Francisco Display 8
 floating_modifier $mod
 
 # Start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
 
 # Kill focused window
 bindsym $mod+Shift+a kill
 
 # Start program launcher
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 16"
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec i3-dmenu-desktop  # https://build.i3wm.org/docs/i3-dmenu-desktop.html
+#bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 16"
 
 # Launch categorized menu
 #bindsym $mod+z exec --no-startup-id morc_menu
@@ -325,5 +328,17 @@ exec_always xmodmap -e "keysym Caps_Lock = Escape"  # set caps_lock as escape, u
 exec --no-startup-id compton -f
 
 # Configure MBP 13" French keyboard
-# Refer to https://faq.i3wm.org/question/5606/using-setxkbmap-to-disabple-capslock/ regarding "sleep 1; "
+# Reference: https://faq.i3wm.org/question/5606/using-setxkbmap-to-disabple-capslock/ regarding "sleep 1; "
 exec_always --no-startup-id "sleep 1; setxkbmap -layout fr -variant mac -model apple"
+
+# Load .Xresources
+exec_always --no-startup-id xrdb $HOME/.Xresources
+
+# Generate a color palette from the dominant colors in the current wallpaper.
+# Pywal then applies the colors system-wide and on-the-fly in all of your 
+# favourite programs.
+# Reference: https://github.com/dylanaraps/pywal
+exec_always --no-startup-id wal -i $HOME/Pictures/wallpaper.jpg
+
+# Execute polybar on startup
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
