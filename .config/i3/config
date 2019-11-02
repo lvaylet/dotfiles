@@ -333,7 +333,7 @@ exec_always xmodmap -e "clear lock"  # disable caps lock switch
 exec_always xmodmap -e "keysym Caps_Lock = Escape"  # set caps_lock as escape, useful in vim
 
 # Run compton on startup to handle transparency and fade effects
-exec --no-startup-id compton -f
+exec --no-startup-id compton --config $HOME/.config/compton 
 
 # Configure MBP 13" French keyboard
 # Reference: https://faq.i3wm.org/question/5606/using-setxkbmap-to-disabple-capslock/ regarding "sleep 1; "
