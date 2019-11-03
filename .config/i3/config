@@ -326,7 +326,9 @@ bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'screen brig
 exec_always --no-startup-id feh --bg-scale $HOME/Pictures/wallpaper.jpg
 
 # Configure monitor(s)
-exec_always --no-startup-id randr --output HDMI-2 --off --output HDMI-1 --off --output DP-1 --off --output eDP-1 --primary --mode 2560x1600 --pos 0x0 --rotate normal --output DP-2 --off
+# Use --scale in addition to the DPI setting in ~/.Xresources to emulate fractional scaling
+# Reference: https://wiki.archlinux.org/index.php/HiDPI#Fractional_Scaling
+exec_always --no-startup-id xrandr --output eDP-1 --primary --mode 2560x1600 --pos 0x0 --rotate normal --scale 1.25x1.25
 
 # Remap keys
 exec_always xmodmap -e "clear lock"  # disable caps lock switch
