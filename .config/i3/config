@@ -7,7 +7,22 @@
 # - https://github.com/bookercodes/dotfiles/blob/ubuntu/.i3/config
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
-set $mod Mod4
+#
+# I prefer using Mod1 when Cmd and Ctrl are switched after following the instructions at:
+# https://askubuntu.com/questions/131900/how-do-i-switch-the-command-key-and-control-key-on-a-macbook-pro
+#
+# Edit `/usr/share/X11/xkb/symbols/pc` so it looks like:
+#
+# key <LCTL> {    [ Super_L       ]   };
+# key <LWIN> {    [ Control_L     ]   };
+#
+# ...
+#
+# key <RCTL> {    [ Super_R       ]   };
+# key <RWIN> {    [ Control_R     ]   };
+#
+# Then clear xkb's cache with `sudo rm -rf /var/lib/xkb/*` and reboot.
+set $mod Mod1
 
 # Set default desktop layout (default is tiling)
 #workspace_layout tabbed <stacking|tabbed>
