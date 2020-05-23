@@ -22,7 +22,7 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'"
 EOT
 
 # Check out the actual content from the bare repository
-config checkout <branch-name>
+dotfiles checkout <branch-name>
 
 # Ignore untracked files in this specific (local) repository
 dotfiles config --local status.showUntrackedFiles no
