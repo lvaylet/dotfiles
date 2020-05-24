@@ -34,7 +34,7 @@ Config {
         \ \
         \<icon=haskell_20.xpm/>\
         \ <fc=#666666>|</fc> \
-        \%UnsafeStdinReader%\
+        \%StdinReader%\
         \ }{ \
         \<fc=#b3afc2>%uname%</fc>\
         \ <fc=#666666>|</fc> \
@@ -89,7 +89,6 @@ Config {
         , Run Com "uname" ["-r"] "" 36000
    
         -- Workspaces, current layout, window title...
-        -- The workspaces are 'clickable' in my configs.
-        , Run UnsafeStdinReader
+        , Run StdinReader
     ]
 }
