@@ -74,7 +74,7 @@ Config {
         , Run Network "enp34s0" ["-t", "\xf0aa <rx>kb  \xf0ab <tx>kb"] 20
    
         -- CPU usage (%)
-        , Run Cpu ["-t", "CPU (<total>%)", "-H", "50", "--high", "red"] 20
+        , Run Cpu ["-t", "CPU <total>%", "-H", "50", "--high", "red"] 20
    
         -- RAM used (number and %)
         , Run Memory ["-t", "MEM <used>M used (<usedratio>%)"] 20
