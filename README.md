@@ -13,13 +13,8 @@ echo ".cfg" >> $HOME/.gitgnore
 # Clone dotfiles into bare repository
 git clone --bare git@github.com:lvaylet/dotfiles.git $HOME/.cfg
 
-# Define alias in current shell scope as well as .bashrc/.zshrc
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-cat <<EOT >> $HOME/{.bashrc,.zshrc}
-
-# Simplify dotfiles management
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'"
-EOT
+# Define alias in current shell scope (already in .zshrc)
+alias dotfiles='/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME"'
 
 # Check out the actual content from the bare repository
 dotfiles checkout <branch-name>
