@@ -110,7 +110,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Simplify dotfiles management
 # Reference: atlassian.com/git/tutorials/dotfiles
-alias dotfiles='/usr/bin/git --git-dir=/home/laurent/.cfg/ --work-tree=/home/laurent'
+alias dotfiles='/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME"'
 
 # Remove username and hostname from prompt
 prompt_context() {}
