@@ -119,3 +119,7 @@ prompt_context() {}
 if [ -d "${HOME}/.local/bin" ]; then
   export PATH="${PATH}:${HOME}/.local/bin"
 fi
+if [ -d "${HOME}/.local/bin/balena-cli" ]; then
+  export PATH="${PATH}:${HOME}/.local/bin/balena-cli"
+fi
+
