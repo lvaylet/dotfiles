@@ -8,7 +8,7 @@ Install these dotfiles onto a new system with:
 ```bash
 # Create and ignore folder where repo is going to be cloned to avoid weird recursion problems
 mkdir $HOME/.cfg
-echo ".cfg" >> $HOME/.gitgnore
+echo ".cfg/" >> $HOME/.gitignore
 
 # Clone dotfiles into bare repository
 git clone --bare git@github.com:lvaylet/dotfiles.git $HOME/.cfg
