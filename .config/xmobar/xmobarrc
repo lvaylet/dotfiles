@@ -1,0 +1,83 @@
+-- http://projects.haskell.org/xmobar/
+-- IMPORTANT Environment variables like $HOME cannot be used here. Use full paths.
+
+Config { -- Name of the font to be used. Use the xft: prefix for XFT fonts.
+         font    = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=true"
+         -- Haskell-style list of fonts to be used with the fn-template. Use the xft: prefix for XFT fonts.
+         -- This config uses Font Awesome 5 fonts for unicode "icons".  On Arch Linux, install the otf-font-awesome-5-free package from the AUR to get these fonts.
+       , additionalFonts = [ "xft:Mononoki Nerd Font:pixelsize=11:antialias=true:hinting=true" -- <fn=1></fn>
+                           , "xft:Font Awesome 5 Free Solid:pixelsize=12"                      -- <fn=2></fn>
+                           , "xft:Font Awesome 5 Brands:pixelsize=12"                          -- <fn=3></fn>
+                           ]
+         -- Background color
+       , bgColor = "#282c34"
+         -- Foreground color
+       , fgColor = "#ff6c6b"
+         -- Position on screen. One of Top, TopP, TopW, TopSize, Bottom, BottomP, BottomW, BottomSize or Static (with x, y, width and height)
+       , position = Top -- or Static { xpos = 0 , ypos = 0, width = 1920, height = 24 }
+         -- When True the window is sent the bottom of the window stack initially.
+       , lowerOnStart = True
+         -- When set to True the window is initially not mapped, i.e. hidden. It then can be toggled manually (for example using the dbus interface) or automatically (by a plugin) to make it reappear.
+       , hideOnStart = False
+         -- When set to True (the default), xmobar will tell the window manager explicitly to be shown in all desktops, by setting _NET_WM_DESKTOP to 0xffffffff.
+       , allDesktops = True
+         -- When True the window status is fixed i.e. hiding or revealing is not possible. This option can be toggled at runtime. Defaults to False.
+       , persistent = True
+         -- Root folder where icons are stored. For <icon=path/> if path start with "/", "./" or "../" it is interpreted as it is. Otherwise it will have iconRoot ++ "/" prepended to it. Default is ".".
+       , iconRoot = "/home/laurent/.xmonad/xpm"
+         -- Set the options of the programs to run
+       , commands = [ -- Time and date
+                      Run Date "<fn=2>\xf017</fn>  %b %d %Y - (%H:%M) " "date" 50
+                      -- Weather
+                    , Run Weather "LFPO"
+                        [ "--template", "<station>: <tempC>°C"
+                        , "-L", "18"
+                        , "-H", "25"
+                        , "--normal", "green"
+                        , "--high", "red"
+                        , "-low", "lightblue"
+                        ] 36000
+                      -- Network up and down
+                    , Run Network "enp0s3"
+                        [ "--template", "<fn=2>\xf0ab</fn>  <rx>kb  <fn=2>\xf0aa</fn>  <tx>kb"
+                        ] 20
+                      -- Cpu usage in percent
+                    , Run Cpu
+                        [ "--template", "<fn=2>\xf108</fn>  cpu: (<total>%)"
+                        , "-H", "50"
+                        , "--high", "red"
+                        ] 20
+                      -- Ram used number and percent
+                    , Run Memory
+                        [ "--template", "<fn=2>\xf233</fn>  mem: <used>M (<usedratio>%)"
+                        ] 20
+                      -- Disk space free
+                    , Run DiskU
+                        [ ("/", "<fn=2>\xf0c7</fn>  hdd: <free> free")
+                        ] [] 60
+                      -- Runs custom script to check for pacman updates.
+                      -- This script is in my dotfiles repo in .local/bin.
+                    , Run Com "/home/laurent/.local/bin/pacupdate" [] "pacupdate" 36000
+                      -- Runs a standard shell command 'uname -r' to get kernel version
+                    , Run Com "uname" ["-r"] "" 3600
+                      -- Input from XMonad
+                    , Run UnsafeStdinReader
+                    ]
+         -- The character to be used for indicating commands in the output template (default '%').
+       , sepChar = "%"
+         -- A 2-character string for aligning text in the output template. The text before the first character will be align to left, the text in between the 2 characters will be centered, and the text after the second character will be align to the right.
+       , alignSep = "}{"
+         -- The output template.
+         -- See https://hackage.haskell.org/package/xmobar-0.37/#quick-start for syntax.
+--       , template = " <icon=haskell_20.xpm/>  \
+--                    \ <fc=#666666>|</fc> %UnsafeStdinReader%\
+--                    \ }{ \
+--                    \ <box type=Bottom width=2 color=#51afef><fc=#51afef><fn=3></fn>  <action=`alacritty -e htop`>%uname%</action> </fc></box>   \
+--                    \ <box type=Bottom width=2 color=#ecbe7b><fc=#ecbe7b><action=`alacritty -e htop`>%cpu%</action></fc></box>   \
+--                    \ <box type=Bottom width=2 color=#ff6c6b><fc=#ff6c6b><action=`alacritty -e htop`>%memory%</action></fc></box>   \
+--                    \ <box type=Bottom width=2 color=#a9a1e1><fc=#a9a1e1><action=`alacritty -e htop`>%disku%</action></fc></box>   \
+--                    \ <box type=Bottom width=2 color=#98be65><fc=#98be65><action=`alacritty -e sudo iftop`>%enp6s0%</action></fc></box>   \
+--                    \ <box type=Bottom width=2 color=#c678dd><fc=#c678dd><fn=2></fn>  <action=`alacritty -e sudo pacman -Syu`>%pacupdate%</action></fc></box>   \
+--                    \ <box type=Bottom width=2 color=#46d9ff><fc=#46d9ff><action=`emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(dt/year-calendar))'`>%date%</action></fc></box>    "
+       , template = " <icon=haskell_20.xpm/>   <fc=#666666>|</fc> %UnsafeStdinReader% }{ <box type=Bottom width=2 color=#51afef><fc=#51afef><fn=3></fn>  <action=`alacritty -e htop`>%uname%</action> </fc></box>    <box type=Bottom width=2 color=#ecbe7b><fc=#ecbe7b><action=`alacritty -e htop`>%cpu%</action></fc></box>    <box type=Bottom width=2 color=#ff6c6b><fc=#ff6c6b><action=`alacritty -e htop`>%memory%</action></fc></box>    <box type=Bottom width=2 color=#a9a1e1><fc=#a9a1e1><action=`alacritty -e htop`>%disku%</action></fc></box>    <box type=Bottom width=2 color=#98be65><fc=#98be65><action=`alacritty -e sudo iftop`>%enp0s3%</action></fc></box>    <box type=Bottom width=2 color=#c678dd><fc=#c678dd><fn=2></fn>  <action=`alacritty -e sudo pacman -Syu`>%pacupdate%</action></fc></box>    <box type=Bottom width=2 color=#46d9ff><fc=#46d9ff><action=`emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(dt/year-calendar))'`>%date%</action></fc></box>    "
+       }

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Requires `checkupdates` in `pacman-contrib` packages
+cupd=$(checkupdates | wc -l)
+echo "$cupd update(s)"
