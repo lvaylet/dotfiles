@@ -1,5 +1,10 @@
 #!/bin/sh
 
+#  __  _  _
+# (  )( \/ )  Laurent Vaylet
+#  )(__\  /   https://github.com/lvaylet/dotfiles
+# (____)\/
+
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources

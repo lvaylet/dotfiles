@@ -1,3 +1,8 @@
+--  __  _  _
+-- (  )( \/ )  Laurent Vaylet
+--  )(__\  /   https://github.com/lvaylet/dotfiles
+-- (____)\/
+
     -- Base
 import XMonad
 import System.Directory

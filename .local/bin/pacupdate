@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+#  __  _  _
+# (  )( \/ )  Laurent Vaylet
+#  )(__\  /   https://github.com/lvaylet/dotfiles
+# (____)\/
+
 # Requires `checkupdates` in `pacman-contrib` packages
 cupd=$(checkupdates | wc -l)
 echo "$cupd update(s)"

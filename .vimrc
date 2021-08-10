@@ -1,10 +1,9 @@
-"  ____ _____ 
-" |  _ \_   _|  Derek Taylor (DistroTube)
-" | | | || |    http://www.youtube.com/c/DistroTube
-" | |_| || |    http://www.gitlab.com/dwt1/
-" |____/ |_|
+"  __  _  _
+" (  )( \/ )  Laurent Vaylet
+"  )(__\  /   https://github.com/lvaylet/dotfiles
+" (____)\/
 "        
-" A customized init.vim for neovim (https://neovim.io/)     
+" A customized init.vim for vim/neovim (https://neovim.io/)     
 
 set nocompatible              " be iMproved, required
 filetype off                  " required

@@ -1,3 +1,8 @@
+--  __  _  _
+-- (  )( \/ )  Laurent Vaylet
+--  )(__\  /   https://github.com/lvaylet/dotfiles
+-- (____)\/
+
 -- http://projects.haskell.org/xmobar/
 -- IMPORTANT Environment variables like $HOME cannot be used here. Use full paths.
 

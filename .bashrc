@@ -1,6 +1,7 @@
-#
-# ~/.bashrc
-#
+#  __  _  _
+# (  )( \/ )  Laurent Vaylet
+#  )(__\  /   https://github.com/lvaylet/dotfiles
+# (____)\/
 
 ### EXPORT
 
