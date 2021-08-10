@@ -42,6 +42,19 @@ case ${TERM} in
     ;;
 esac
 
+### SHELL OPTIONS
+
+shopt -s autocd          # change to named directory
+shopt -s cdspell         # autocorrects cd misspellings
+shopt -s cmdhist         # save multi-line commands in history as single line
+shopt -s dotglob         # include filename beginning with a '.' in the results of filename expansion
+shopt -s histappend      # do not overwrite history
+shopt -s expand_aliases  # expand aliases
+shopt -s checkwinsize    # checks term size when bash regains control
+
+# ignore upper and lowercase on TAB completion
+bind "set completion-ignore-case on"
+
 ### HELPER FUNCTIONS
 
 # Archive extraction
@@ -94,13 +107,17 @@ up () {
 
 ### ALIASES
 
+# Root privileges
+alias doas="doas --"
+
+# Download and run install script from my GitHub Gists
 alias install='curl -Lo install_my_linux.sh https://git.io/JRsiW && chmod u+x install_my_linux.sh && ./install_my_linux.sh'
 
 # vim
 alias vim="nvim"
 
 # bat
-# alias cat='bat'
+alias cat='bat'
 
 # broot
 alias br='broot -dhp'
@@ -152,6 +169,12 @@ alias merge='xrdb -merge ~/.Xresources'
 # Get error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 
+# GPG encryption
+# Verify the signature of an ISO
+alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+# Receive the key of a developer
+alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+
 # Switch between shells
 # I do not recommend switching default SHELL from bash.
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
@@ -168,4 +191,3 @@ source ~/.config/broot/launcher/bash/br
 ### STARSHIP
 
 eval "$(starship init bash)"
-
