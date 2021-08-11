@@ -18,7 +18,7 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 cat <<EOT >> $HOME/{.bashrc,.zshrc}
 
 # Simplify dotfiles management
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'"
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 EOT
 
 # Check out the actual content from the bare repository
