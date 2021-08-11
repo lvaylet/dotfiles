@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = haskell*
+
+[Action]
+Description = Recompiling XMonad now because of Haskell updates ...
+When = PostTransaction
+Depends = xmonad
+Exec = /bin/sh -c "runuser -l $( who | cut -d ' ' -f1 | uniq) -c 'xmonad --recompile'"
