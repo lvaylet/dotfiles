@@ -7,6 +7,7 @@
 ! Reference: https://wiki.archlinux.org/title/Font_configuration#Fontconfig_configuration
 
 ! DPI is important, especially on MacBook Retina displays. 96 is standard. Higher values like 192 or even 220 make fonts bigger.
+! Reference: https://vincent.jousse.org/blog/en/archlinux-retina-hidpi-macbookpro-xmonad
 Xft.dpi:        96
 
 ! Anti-aliasing
