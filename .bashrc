@@ -109,16 +109,29 @@ up () {
 ### ALIASES
 
 # Root privileges
-alias doas="doas --"
+alias doas='doas --'
 
 # Download and run install script from my GitHub Gists
 alias install='curl -Lo install_my_linux.sh https://git.io/JRsiW && chmod u+x install_my_linux.sh && ./install_my_linux.sh'
 
-# vim
-alias vim="nvim"
+# Bare git repo alias for dotfiles
+alias dotfiles="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
-# bat
-alias cat='bat'
+# cd
+alias ..='cd ..'
+
+# mkdir
+alias mkdir='mkdir -p'
+
+# ping
+alias ping='ping -c 3'
+
+# vim
+alias vi='vim'
+alias vim='nvim'
+
+# bat (https://dev.to/joaovitor/bat-instead-of-cat-a86)
+alias cat='bat --style=plain'
 
 # broot
 alias br='broot -dhp'
@@ -133,17 +146,16 @@ alias parsyu='paru -Syu --noconfirm'               # update standard pkgs and AU
 alias unlock='sudo rm /var/lib/pacman/db.lck'      # remove pacman lock
 alias cleanup='pacman -Qtdq | sudo pacman -Rns -'  # remove orphaned packages
 
-# Changing "ls" to "exa"
-alias ls='exa -al --color=always --group-directories-first'  # my preferred listing
-alias la='exa -a --color=always --group-directories-first'   # all files and dirs
-alias ll='exa -l --color=always --group-directories-first'   # long format
-alias lt='exa -aT --color=always --group-directories-first'  # tree listing
-alias l.='exa -a | egrep "^\."'
+# Replacing "ls" with "exa" (https://dev.to/joaovitor/exa-instead-of-ls-1onl)
+alias l='exa'
+alias la='exa -a'
+alias ll='exa -lah --git'
+alias ls='exa --color=auto'
 
 # Retrieve and filer the latest Pacman mirrorlist
 # Reference: https://wiki.archlinux.org/title/reflector
 # Select the HTTPS mirrors synchronized within the last 12 hours and located in France, sort them by download speed, and overwrite the file /etc/pacman.d/mirrorlist with the results:
-alias mirror="sudo reflector --country France --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+alias mirror='sudo reflector --country France --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
@@ -151,7 +163,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # Confirm before overwriting something
-alias cp="cp -i"
+alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
@@ -167,22 +179,19 @@ alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 alias merge='xrdb -merge ~/.Xresources'
 
 # Get error messages from journalctl
-alias jctl="journalctl -p 3 -xb"
+alias jctl='journalctl -p 3 -xb'
 
 # GPG encryption
 # Verify the signature of an ISO
-alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+alias gpg-check='gpg2 --keyserver-options auto-key-retrieve --verify'
 # Receive the key of a developer
-alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+alias gpg-retrieve='gpg2 --keyserver-options auto-key-retrieve --receive-keys'
 
 # Switch between shells
 # I do not recommend switching default SHELL from bash.
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
 alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
-
-# Bare git repo alias for dotfiles
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 ### BROOT
 
