@@ -110,6 +110,7 @@ up () {
 
 # Root privileges
 alias doas='doas --'
+alias _='sudo '
 
 # Download and run install script from my GitHub Gists
 alias install='curl -Lo install_my_linux.sh https://git.io/JRsiW && chmod u+x install_my_linux.sh && ./install_my_linux.sh'
@@ -117,11 +118,13 @@ alias install='curl -Lo install_my_linux.sh https://git.io/JRsiW && chmod u+x in
 # Bare git repo alias for dotfiles
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
-# cd
+# Emulate zsh / Oh My Zsh behavior
+function take() {    mkdir -p $@ && cd ${@:$#}  }
 alias ..='cd ..'
-
-# mkdir
-alias mkdir='mkdir -p'
+alias ...=../..
+alias ....=../../..
+alias .....=../../../..
+alias ......=../../../../..
 
 # ping
 alias ping='ping -c 3'
