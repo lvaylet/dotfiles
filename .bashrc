@@ -116,10 +116,12 @@ alias _='sudo '
 alias install='curl -Lo install_my_linux.sh https://git.io/JRsiW && chmod u+x install_my_linux.sh && ./install_my_linux.sh'
 
 # Bare git repo alias for dotfiles
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Emulate zsh / Oh My Zsh behavior
-function take() {    mkdir -p $@ && cd ${@:$#}  }
+take () {
+    mkdir -p $@ && cd ${@:$#}
+}
 alias ..='cd ..'
 alias ...=../..
 alias ....=../../..
